@@ -1,36 +1,23 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <AddTodoVue />
+  <div>
+    <AddTodoVue />
+  </div>
 </template>
 
 <script>
-  import { createClient } from '@supabase/supabase-js'
-  const supabaseUrl = 'https://fnzqgervsfmcxdohsvxj.supabase.co'
-  const supabaseKey = process.env.VUE_APP_SUPABASE_KEY;
-  export const supabase = createClient(supabaseUrl, supabaseKey)
-
-  import AddTodoVue from './components/AddTodo.vue';
-
-  const fetchTodos = async () => {
-    let { data: Todos } = await supabase
-      .from('Todos')
-      .select('*')
-
-      console.log(Todos)
-  }
-
-  const mounted = () => {
-    fetchTodos();
-  }
+import AddTodoVue from './components/AddTodo.vue';
 
 export default {
   name: 'App',
+  data() {
+    return {
+      todosArray: [],
+    };
+  },
   components: {
     AddTodoVue,
   },
-  mounted,
   methods: {
-    fetchTodos,
   }
 }
 </script>
